@@ -1,6 +1,6 @@
 // npm init --yes
-// npm i express dotenv cors
-// npm install --save-dev nodemon 
+// npm i express cors
+// npm i --save-dev nodemon 
 // package.json에서 
 // "test": "echo \"Error: no test specified\" && exit 1"를
 // "start" : "nodemon index.js"로 고치고
@@ -11,10 +11,9 @@ const app = express();
 const cors = require('cors');
 const postRoute = require("./routes/posts");
 
-app.use(express.json());
+app.use(express.json({extended: false}));
 app.use(cors());
 
-// 페이지 불러오기
 app.get('/', function(req, res, next) {
     res.send('index');
 });
