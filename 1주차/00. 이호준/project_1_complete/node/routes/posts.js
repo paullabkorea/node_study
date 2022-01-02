@@ -28,6 +28,7 @@ router.get('/:id', (req, res, next) => {
 //     "section" : "hello world section"
 // }
 router.post('/', (req, res, next) => {
+    // console.log(req);
     console.log(req.body);
     const id = posts.posts.length + 1;
     const title = req.body.title;
@@ -37,8 +38,8 @@ router.post('/', (req, res, next) => {
     const modDate = new Date().toString();
     let post = {id, title, content, section, pubDate, modDate};
     posts.posts.push(post);
-    // res.redirect("http://127.0.0.1:5500/1%EC%A3%BC%EC%B0%A8/00.%20%EC%9D%B4%ED%98%B8%EC%A4%80/project_1_complete/html/index_form.html");
-    res.status(201).json(post);
+    res.redirect("http://127.0.0.1:5500/1%EC%A3%BC%EC%B0%A8/00.%20%EC%9D%B4%ED%98%B8%EC%A4%80/project_1_complete/html/index_form.html");
+    // res.status(201).json(post);
 })
 
 module.exports = router;
