@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <h1>메모장</h1>
+    <form action="http://localhost:8080/api/posts" method="post">
+        <input type="text" id="title" name="title">
+        <input type="text" id="content" name="content">
+        <input type="text" id="section" name="section">
+        <button type="button" onclick="submit()">제출</button>
+    </form>
+    <div class="note-list"></div>
+    <script>
+        const noteList = document.querySelector(".note-list");
+        const BASE_URI = "http://localhost:8080/api/posts";
+
+        fetch(BASE_URI)
+        .then(function(response) {
+            console.log(1);
+            return response.json();
+        })
+        .then(function(json) {
+            console.log(2);
+            console.log(json);
+            addNote(json.data);
+            return json
+        })
+        .catch(err => alert(err))
+
+        function addNote(note) {
+            console.log(note);
+            note.posts.forEach(notedata=>{
+                const newNote = document.createElement("div");
+                newNote.classList.add("note");
+                newNote.innerHTML = `
+                    <p>${notedata.id}</p>
+                    <p>${notedata.title}</p>
+                    <p>${notedata.content}</p>
+                    <p>------------</p>
+                `;
+                noteList.appendChild(newNote);
+            });
+        }
+
+    function submit() {
+        
+    }
+    </script>
+</body>
+</html>
