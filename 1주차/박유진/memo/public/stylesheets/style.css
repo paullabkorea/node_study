@@ -1,0 +1,87 @@
+body {
+  padding: 50px;
+}
+
+a {
+  color: #ffbb00;
+}
+
+#main {
+	margin-left: auto;
+	margin-right: auto;
+	width: 700px;
+	background-color: wheat;
+	display: flex;
+  	flex-direction: column;
+  	justify-content: center;
+  	align-items:center;
+	border:1px solid  #ddddaa;
+}
+
+#title {
+	font-size: 16px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #fff;
+	width: 100%;
+	text-align: center;
+	padding: 10px 0;
+	color: #999;
+}
+#write {
+	height: 140px;
+	margin-bottom: 10px;
+	padding: 30px 0;	
+	min-height: 100%;
+	text-align: right;
+}
+.left {
+	text-align: left;
+}
+.right {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	justify-content: center;
+}
+#write textarea{
+	width: 600px;
+	height: 100px;
+	margin-bottom: 5px;
+}
+
+#write_button {
+	height: 30px;
+	background-color: peru;
+	border: none;
+	cursor: pointer;
+}
+
+#memo {
+	border: 1px solid #ddddaa;
+	background-color: #fff;
+	width: 700px;
+}
+
+#memo .item {
+	margin: 10px;
+	clear: both;
+}
+
+#memo .author {
+	width: 680px;
+	padding: 5px;
+	border: 1px solid #ddddcc;
+	background-color: #fff;
+	margin-bottom: 5px;
+	box-sizing: border-box;
+}
+
+#memo .contents {
+	width: 680px;
+	padding: 5px;
+	word-wrap: break-word;
+	border: 1px solid #ddddcc;
+	box-sizing: border-box;
+	background-color: ivory;
+}

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link rel="stylesheet" href="/stylesheets/style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+      integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <h1 class="mb-4">MEMO</h1>
+    <button class="btn btn-primary" onclick="location.href='/write'">New</button>
+    <table class="table mt-3">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Title</th>
+          <th scope="col">Author</th>
+          <th scope="col">Time</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (board !== null){ for(var i = 0; i < board.length; i++) { %>
+          <tr>
+            <th scope="row">        <a
+              style="color: black; text-decoration: none"
+              href="/board/<%= board[i]._id%>"
+            ><%=i+1%></a></th>
+            <td>        <a
+              style="color: black; text-decoration: none"
+              href="/board/<%= board[i]._id%>"
+            ><%=board[i].title%></a></td>
+            <td><%=board[i].author%></td>
+            <td><%=board[i].board_date%></td>
+          </tr>
+        </a>
+        <% }} %>
+      </tbody>
+    </table>
+  </body>
+</html>

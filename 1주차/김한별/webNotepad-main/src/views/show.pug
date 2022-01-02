@@ -1,0 +1,33 @@
+doctype html
+html(lang="en")
+  head
+    meta(charset="UTF-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0")
+    link(rel="stylesheet", href="public/stylesheets/reset.css")
+    link(rel="stylesheet", href="public/stylesheets/style.css")
+    title Main Notepad
+  body
+    h1 Web Notepad
+    //-div(class="message alert-message") hi message
+
+    div.form-wrapper
+      form
+        label(for="title") Title
+          input(type="text" placeholder="Enter your memo" id="title")
+        label(for="note") Note
+          textarea(id="note" name="note", cols="30", rows="5")
+        input(type="submit" value="Save")
+    div.note-container
+        if test
+          each potato in test
+            h2=note
+        else
+          h2  sorry nothing memo in here
+    div.modal-wrapper
+      div.modal
+        button.modal_btn &times;
+        h2.modal_title Title here
+        p.modal_body Lorem ipsum dolor sit amet consectetur adipisicing.
+
+    script(src="/public/js/app.js")
