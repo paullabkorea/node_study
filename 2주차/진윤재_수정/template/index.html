@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>(R&R)</title>
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+    <section class="container-lg">
+        <h1>ReadRecord(R&R)</h1>
+        <article class="row" style="height: 800px;">
+            <aside class="col-3 d-flex flex-column justify-content-between">
+                <ul class="pagelist">
+                </ul>
+                <button id="addbtn" class="btn btn-primary">추가</button>
+            </aside>
+            <div id="content" class="col-9 d-flex justify-content-center"> 
+            </div>
+        </article>
+    </section>
+    
+    
+    <script>
+        const body = document.querySelector('body');
+        const addbtn = body.querySelector('#addbtn');
+        const url = "http://127.0.0.1:8080/";
+        
+        const pagelist = body.querySelector('.pagelist');
+        // list 추가
+        addbtn.onclick = async ()=> {
+            await fetch(url, {
+                method : "post",
+                headers: {
+                    "Content-type" : "application/json"
+                }
+            })
+            window.location.href="/template/index.html";
+        };
+
+        async function listdelete(e) {
+            const input= e.target.parentNode.querySelector('input');
+            const id =input.id;
+            await fetch(url+id, {
+                method : "delete",
+                headers: {
+                    "Content-type" : "application/json"
+                }
+            })
+            window.location.href="/template/index.html";
+        }
+        // list 가져오기
+        async function read(){
+            const res = await fetch(url, {
+                headers: {
+                    "Content-type" : "application/json"
+                }
+            })
+            const data = await res.json();
+            for (const d of data) {
+                createInput(d);
+            }
+            infoinp = pagelist.querySelectorAll('input');
+        }
+        // list 버튼 활성화
+        function showbtn(e){
+            const id = e.target.id;
+            showUpdate(id);
+            const no = pagelist.querySelectorAll('button');
+            for (const i of no) {
+                i.style.display='none';
+            }
+            const btn = e.target.parentNode.querySelector('button');
+            btn.style.display='block';
+        }
+        // title 업데이트
+        async function update(e) {
+            const title = e.target.value;
+            const id = e.target.id;
+            const res = await fetch(url+id, {
+                method : "put",
+                headers: {
+                    "Content-type" : "application/json"
+                },
+                body: JSON.stringify({
+                    title
+                })
+            })
+        }
+        // content 업데이트
+        const content = body.querySelector("#content");
+        async function contentUpdate(e) {
+            const cont = e.target.value;
+            const id = e.target.className;
+            const res = await fetch(url+"cont/"+id, {
+                method : "put",
+                headers: {
+                    "Content-type" : "application/json"
+                },
+                body: JSON.stringify({
+                    content :cont,
+                })
+            })
+        }
+        // content 가져오기
+        async function showUpdate(id){
+            const list = content.querySelectorAll("textarea");
+            list.forEach((d)=>{
+                d.style.display="none";
+            })
+            const page = content.getElementsByClassName(id);
+            page[0].style.display = "block";
+            
+        }
+        // list 추가
+        function createInput(data) {
+            const li = document.createElement('li');
+            const input = document.createElement('input');
+            const btn = document.createElement('button');
+            const textarea = document.createElement('textarea');
+            // <textarea name="" id="" cols="30" rows="10"></textarea>
+            textarea.className = data._id;
+            textarea.cols ="100";
+            textarea.rows ="10";
+            textarea.style.display="none";
+            textarea.textContent = data.content;
+            textarea.onblur = contentUpdate;
+            li.className ="d-flex";
+            li.appendChild(input);
+            li.appendChild(btn);
+            btn.className ="btn btn-primary";
+            btn.style = "width: 6rem;display:none";
+            btn.textContent= "삭제";
+            btn.onclick = listdelete;
+            input.type = 'text';
+            input.value = data.title;
+            input.id = data._id;
+            input.onfocus = showbtn;
+            input.onblur = update;
+            content.appendChild(textarea);
+            pagelist.appendChild(li);
+        }
+        
+        read();
+    </script>
+</body>
+</html>
