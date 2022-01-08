@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="css/style.css">
+  </head>
+  <body>
+    <section class="container">
+      <form action="/books/{{book.id}}" method="post" class="form-book-write">
+        <label for="title">Book title</label>
+        <textarea type="text" id="title" name="title">{{book.title}}</textarea>
+        <br>
+        <label for="author">Book author</label>
+        <textarea type="text" id="author" name="author">{{book.author}}</textarea>
+        <br>
+        <label for="star">How many stars?</label>
+        <textarea type="number" id="star" name="star">{{book.star}}</textarea>
+        <br>
+        <label for="review">Write your review</label>
+        <textarea id="review" name="review">{{book.review}}</textarea>
+        <br>
+        <button type="submit">Edit Review</button>
+      </form>
+    </section>
+  </body>
+</html>

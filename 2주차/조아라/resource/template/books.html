@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <section class="container container-books">
+      <!-- <button>← Go Back</button> -->
+      {% for book in books %}
+      <form class="item-book" action="/books/{{book.id}}">
+        <h2>{{book.title}}</h2>
+        <p>by {{book.author}}</p>
+        <p class="book-star">{{book.star}} / 5</p>
+        <button>Check out!</button>
+      </form>
+      {% endfor %}
+      <form action="/books/write" method="get">
+        <button type="submit">Write your review!</button>
+      </form>
+    </section>
+  </body>
+</html>

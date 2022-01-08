@@ -1,0 +1,35 @@
+{
+  "name": "sideproject_02",
+  "version": "1.0.0",
+  "description": "sideproject_02 crud만들기",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/gwansiklim/sideproject_02.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/gwansiklim/sideproject_02/issues"
+  },
+  "homepage": "https://github.com/gwansiklim/sideproject_02#readme",
+  "dependencies": {
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "debug": "^4.3.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.2",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "nunjucks": "^3.2.3",
+    "sequelize": "^7.0.0-alpha.4"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.3.0"
+  }
+}
