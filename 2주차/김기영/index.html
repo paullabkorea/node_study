@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title></title>
+    <style>
+      body {
+        display: flex;
+      }
+      body > div {
+        flex: 1;
+        width: 50vw;
+      }
+      .note-list {
+        cursor: pointer;
+      }
+      .detail-modal {
+        padding-top: 20%;
+        display: none;
+        flex-direction: column;
+      }
+      .detailId {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>독서 노트</h1>
+      <input type="text" id="title" name="title" />
+      <input type="text" id="content" name="content" />
+      <button type="button" onclick="submit()">제출</button>
+      <div class="note-list"></div>
+    </div>
+    <div class="detail-modal">
+      <div class="closeBtn">X</div>
+      <div class="detailId"></div>
+      <input class="title" type="text" name="title" />
+      <textarea class="content"></textarea>
+      <div class="date"></div>
+      <button type="button" onclick="modify()">수정</button>
+      <button type="button" onclick="deleteNote()">삭제</button>
+    </div>
+    <script>
+      const noteList = document.querySelector(".note-list");
+      const BASE_URI = "http://localhost:8080/api/posts";
+      const modal = document.querySelector(".detail-modal");
+      const closeBtn = document.querySelector(".closeBtn");
+
+      const formatDate = (date) => {
+        let d = new Date(date);
+        let month = "" + (d.getMonth() + 1);
+        let day = "" + d.getDate();
+        let year = d.getFullYear();
+        if (month.length < 2) {
+          month = "0" + month;
+        }
+        if (day.length < 2) {
+          day = "0" + day;
+        }
+        return [year, month, day].join("-");
+      };
+
+      fetch(BASE_URI)
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (json) {
+          addNote(json);
+          return json;
+        })
+        .catch((err) => alert(err));
+
+      function addNote(note) {
+        note.posts.forEach((notedata, index) => {
+          const newNote = document.createElement("div");
+          newNote.classList.add("note");
+          newNote.innerHTML = `
+                                <p>${index + 1}</p>
+                                <p>${notedata.title}</p>
+                                <p>${notedata.content}</p>
+                                <p>------------</p>
+                            `;
+          newNote.addEventListener("click", (e) => {
+            const detailTitle = document.querySelector(".title");
+            const detailContent = document.querySelector(".content");
+            const detailDate = document.querySelector(".date");
+            const detailId = document.querySelector(".detailId");
+            detailTitle.value = notedata.title;
+            detailContent.value = notedata.content;
+            detailDate.textContent = `생성 날짜 : ${formatDate(
+              notedata.create_date
+            )} 최근 수정 날짜 : ${formatDate(new Date())}`;
+            detailId.textContent = notedata._id;
+            modal.style.display = "flex";
+          });
+          noteList.appendChild(newNote);
+        });
+      }
+
+      async function submit(e) {
+        const title = document.querySelector("#title").value;
+        const content = document.querySelector("#content").value;
+
+        await fetch(BASE_URI, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ title, content }),
+        })
+          .then((response) => response.json())
+          .then((data) => addNode(data))
+          .catch((error) => {
+            console.error();
+          });
+        window.location.reload();
+      }
+
+      async function modify(e) {
+        const title = document.querySelector(".title").value;
+        const content = document.querySelector(".content").value;
+        const id = document.querySelector(".detailId").textContent;
+        const modifyDate = new Date();
+        await fetch(`${BASE_URI}/${id}`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            title: title,
+            content: content,
+            modify_date: modifyDate,
+          }),
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            addNode(data);
+          })
+          .catch((error) => {
+            console.error();
+          });
+        closeBtn.click();
+        window.location.reload();
+      }
+
+      async function deleteNote(e) {
+        const id = document.querySelector(".detailId").textContent;
+        await fetch(`${BASE_URI}/${id}`, {
+          method: "DELETE",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((error) => {
+            console.error();
+          });
+        closeBtn.click();
+        window.location.reload();
+      }
+
+      closeBtn.addEventListener("click", () => {
+        modal.style.display = "none";
+      });
+    </script>
+  </body>
+</html>
