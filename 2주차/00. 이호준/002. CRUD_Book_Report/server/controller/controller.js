@@ -30,7 +30,6 @@ exports.create = (req,res)=>{
                 message : err.message || "Some error occurred while creating a create operation"
             });
         });
-
 }
 
 // retrieve and return all users/ retrive and return a single user
@@ -59,9 +58,7 @@ exports.find = (req, res)=>{
             .catch(err => {
                 res.status(500).send({ message : err.message || "Error Occurred while retriving user information" })
             })
-    }
-
-    
+    }    
 }
 
 exports.findOne = (req, res)=>{
@@ -93,10 +90,12 @@ exports.update = (req, res)=>{
     }
 
     const id = req.params.id;
+
     console.log(req.body);
     if(req.body.categories){
         req.body.categories = req.body.categories.split(', ');
     }
+    req.body.updatedAt = new Date();
     Blogdb.findByIdAndUpdate(id, req.body, { useFindAndModify: false})
         .then(data => {
             if(!data){
