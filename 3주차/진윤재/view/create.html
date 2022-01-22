@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/hehe.css">
+    <title></title>
+</head>
+<body>
+    
+    <div id="container">
+        <div class="sub">
+            <p id="category-title" class="sub_text">게시물 만들기</p>
+            <p class="sub_count"></p>
+        </div>
+        <div class='form'>    
+            <input class="form_input" type="text" placeholder="제목을 입력해주세요.">
+        </div>
+
+        <div class="form-check form-switch" id="mark">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked">
+            <label class="form-check-label" for="flexSwitchCheckChecked">markDown</label>
+        </div>
+        <section class="editor">
+            <p class="text">text</p>
+            <div class="inptxt" contenteditable></div>
+            <p class="viewer">viewer</p>
+            <div class="showmd">    
+            </div>
+        </section>
+        <button type="button" class="create">create</button>
+        <button type="button" class="main">뒤로가기</button>
+        <label for="form_btn" class="form_btn">img</label>
+        <input type="file" id="form_btn">
+    </div>
+    <script src="js/create.js"></script>
+</body>
+</html>
