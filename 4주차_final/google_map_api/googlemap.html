@@ -21,30 +21,13 @@
           center: jeju
         });
 
-        var marker = new google.maps.Marker({
-          position: jeju,
-          map: map
-        });
-
-        var marker = new google.maps.Marker({
-          position: {lat: data[0]["lat"], lng: data[0]["lng"]},
-          map: map
-        });
-
-        var marker = new google.maps.Marker({
-          position: {lat: data[1]["lat"], lng: data[1]["lng"]},
-          map: map
-        });
-
-        var marker = new google.maps.Marker({
-          position: {lat: data[2]["lat"], lng: data[2]["lng"]},
-          map: map
-        });
-
-        var marker = new google.maps.Marker({
-          position: {lat: data[3]["lat"], lng: data[3]["lng"]},
-          map: map
-        });
+        for (const key in data) {
+          console.log(key);
+          var marker = new google.maps.Marker({
+            position: {lat: data[key]["lat"], lng: data[key]["lng"]},
+            map: map
+          });
+        }
       }
     </script>
     <script async defer

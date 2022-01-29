@@ -1,0 +1,50 @@
+<input type="text" class="search-input">
+<div class="search-container">
+    <!-- <ul class="search-result"></ul> -->
+</div>
+
+<script>
+    const search = document.querySelector('.search-input');
+    const resultCont = document.querySelector('.search-container')
+    const result = document.querySelector('.search-result');
+    const resultFrag = new DocumentFragment();
+
+
+    search.addEventListener("keyup", () => {
+        drawPlace(search.value);
+    })
+    async function drawPlace(searchValue) {
+        // 데이터 받아오기
+        const placeList = await searchPlace(searchValue);
+        
+        // 기존의 DOM 삭제
+        const oldSearchList = document.querySelector(".search-result");
+        console.log(oldSearchList);
+        if(oldSearchList){
+            oldSearchList.remove();
+        }
+
+        // 교체할 새로운 DOM 생성
+        const newSearchList = document.createElement('ul');
+        newSearchList.classList.add("search-result");
+        Array.from(placeList).forEach(place => {
+            const list = document.createElement('li');
+            list.innerHTML = `
+                <p>${place.name}</p>
+            `;
+            resultFrag.appendChild(list);
+        });
+        newSearchList.appendChild(resultFrag);
+
+        resultCont.appendChild(newSearchList);
+    }
+
+    async function searchPlace(searchValue) {
+        const res = await fetch(`http://localhost:8080/api/search?search=${searchValue}`)
+        const result = await res.json();
+        return result;
+        // console.log(typeof result);
+        // console.log(result);
+    }
+
+</script>
