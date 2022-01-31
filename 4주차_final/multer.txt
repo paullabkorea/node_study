@@ -10,3 +10,10 @@ https://www.a-mean-blog.com/ko/blog/%EB%8B%A8%ED%8E%B8%EA%B0%95%EC%A2%8C/_/Node-
 * multer 관련 검색 키워드(post 방식)
 node multipart/form-data post multer
 node multipart/form-data post
+
+* 관련 블로그
+https://eething.github.io/docs/Programming/nodejs/nodejs-request-multipart-formdata/
+
+https://jungsikjeong.github.io/nodejs/2020/07/23/multer/
+
+https://ekgoddldi.tistory.com/191
