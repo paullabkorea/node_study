@@ -5,3 +5,8 @@ multer - single - req.file(파일), req.body(정보)
          - none - req.body(모두)
 
 https://www.a-mean-blog.com/ko/blog/%EB%8B%A8%ED%8E%B8%EA%B0%95%EC%A2%8C/_/Node-JS-Multer%EB%A1%9C-%ED%8C%8C%EC%9D%BC-%EC%97%85%EB%A1%9C%EB%93%9C
+
+
+* multer 관련 검색 키워드(post 방식)
+node multipart/form-data post multer
+node multipart/form-data post
